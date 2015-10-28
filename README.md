@@ -1,0 +1,2 @@
+# CpuTemp
+Durchscnittstemperatur messen
