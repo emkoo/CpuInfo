@@ -33,7 +33,7 @@ def senden():
 
          value = "Die Durchschnittstemperatur heute: " + str(wert) + " Grad Celsius."
          msg = MIMEText(value)
-         msg['Subject'] = " Rasperry Pi Temperatur " + str(wert) + " Grad!"
+         msg['Subject'] = "Rasperry Pi Temperatur " + str(wert) + " Grad!"
          msg['From'] = sender
          msg['To'] = receiver
          server.sendmail(sender, receiver, msg.as_string())
