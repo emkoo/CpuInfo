@@ -33,7 +33,7 @@ def senden():
 
          value = "Die Durchschnittstemperatur heute: " + str(wert) + " Grad Celsius."
          msg = MIMEText(value)
-         msg['Subject'] = " Rasperry Pi Temperatur " + str(wert) + " Grad!"
+         msg['Subject'] = "Raspberry Pi Temperatur " + str(wert) + " Grad!"
          msg['From'] = sender
          msg['To'] = receiver
          server.sendmail(sender, receiver, msg.as_string())
@@ -42,11 +42,11 @@ def senden():
 count = 0
 allTemps =[]
 while True:
-    time.sleep(15)
+    time.sleep(60)
     temp = getTempCPU()
     allTemps.append(float(temp))
-    count += 1
-    if count == 2:        ##1440
+    count += 1339
+    if count == 1440:        ##1440
         ##analysieren()
         senden()
         count = 0
