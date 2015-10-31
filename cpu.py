@@ -53,6 +53,6 @@ while True:
     if count == 1440:  ##1440
         ##analysieren()
         senden()
-        count = 1
+        count = 2
         del allTemps[:]
     continue
