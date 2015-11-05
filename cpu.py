@@ -13,8 +13,14 @@ receiver = ""
 
 
 def getTempCPU():
-    temp1 = os.popen('vcgencmd measure_temp').readline()
-    return (temp1.replace("temp=", "").replace("'C\n", ""))
+    tempCPU = os.popen('vcgencmd measure_temp').readline()
+    return tempCPU.replace("temp=", "").replace("'C\n", "")
+
+def getVoltCPU():
+    voltCPU = os.popen('vcgencmd measure_volt').readline()
+    return voltCPU.replace("volt=1","").replace("V")
+
+
 
 
 def analysieren():
@@ -22,8 +28,21 @@ def analysieren():
     for temp in allTemps:
         temps = + temp
     durchschnitt = temps / len(allTemps)
-    return (durchschnitt)
+    return durchschnitt
 
+count = 0
+allTemps = []
+while True:
+    time.sleep(60)
+    temp = getTempCPU()
+    allTemps.append(float(temp))
+    count += 1339
+    if count == 1440:  ##1440
+        ##analysieren()
+        senden()
+        count = 2
+        del allTemps[:]
+    continue
 
 def senden():
     wert = float(analysieren())
@@ -43,16 +62,3 @@ def senden():
     server.quit()
 
 
-count = 0
-allTemps = []
-while True:
-    time.sleep(60)
-    temp = getTempCPU()
-    allTemps.append(float(temp))
-    count += 1339
-    if count == 1440:  ##1440
-        ##analysieren()
-        senden()
-        count = 2
-        del allTemps[:]
-    continue
