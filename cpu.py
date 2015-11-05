@@ -45,7 +45,8 @@ while True:
     continue
 
 def senden():
-    wert = float(analysieren())
+    wertTemp = float(analysieren())
+    wertVolt = float(getVoltCPU())
     server = smtplib.SMTP()
     server.connect('smtp.mail.de', 587)
     server.ehlo()
@@ -53,7 +54,7 @@ def senden():
     server.ehlo()
     server.login(sender, senderPassword)
 
-    value = "Die Durchschnittstemperatur heute: " + str(wert) + " Grad Celsius."
+    value = "Die Durchschnittstemperatur heute: " + str(wertTemp) + " Grad Celsius."
     msg = MIMEText(value)
     msg['Subject'] = "Raspberry Pi Temperatur " + str(wert) + " Grad!"
     msg['From'] = sender
