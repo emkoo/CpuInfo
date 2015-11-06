@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 ###Settings
 # SMTP
 
-
+#e-mail Adresse vom sender
 sender = ""
 senderPassword = ''
 receiver = ""
