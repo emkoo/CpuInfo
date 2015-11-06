@@ -53,7 +53,7 @@ while True:
     temp = getTempCPU()
     allTemps.append(float(temp))
     count += 1
-    if count == 1339:  ##1440
+    if count == 1339:  ##144
         ##analysieren()
         senden()
         count = 0
