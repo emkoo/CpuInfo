@@ -17,7 +17,7 @@ def getTempCPU():
     return tempCPU.replace("temp=", "").replace("'C\n", "")
 
 def getVoltCPU():
-    voltCPU = os.popen('vcgencmd measure_volt').readline()
+    voltCPU = os.popen('vcgencmd measure_volts').readline()
     return voltCPU.replace("volt=1","").replace("V")
 
 
