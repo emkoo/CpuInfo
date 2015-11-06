@@ -18,9 +18,7 @@ def getTempCPU():
 
 def getVoltCPU():
     voltCPU = os.popen('vcgencmd measure_volts').readline()
-    return voltCPU.replace("volt=1","").replace("V")
-
-
+    return voltCPU.replace("volt=1","").replace("V", "")
 
 
 def analysieren():
@@ -29,20 +27,6 @@ def analysieren():
         temps = + temp
     durchschnitt = temps / len(allTemps)
     return durchschnitt
-
-count = 0
-allTemps = []
-while True:
-    time.sleep(60)
-    temp = getTempCPU()
-    allTemps.append(float(temp))
-    count += 1339
-    if count == 1440:  ##1440
-        ##analysieren()
-        senden()
-        count = 2
-        del allTemps[:]
-    continue
 
 def senden():
     wertTemp = float(analysieren())
@@ -56,10 +40,22 @@ def senden():
 
     value = "Die Durchschnittstemperatur heute: " + str(wertTemp) + " Grad Celsius."
     msg = MIMEText(value)
-    msg['Subject'] = "Raspberry Pi Temperatur " + str(wert) + " Grad!"
+    msg['Subject'] = "Raspberry Pi Temperatur " + str(wertVolt) + " Grad!"
     msg['From'] = sender
     msg['To'] = receiver
     server.sendmail(sender, receiver, msg.as_string())
     server.quit()
 
-
+count = 0
+allTemps = []
+while True:
+    time.sleep(60)
+    temp = getTempCPU()
+    allTemps.append(float(temp))
+    count += 1
+    if count == 1339:  ##1440
+        ##analysieren()
+        senden()
+        count = 0
+        del allTemps[:]
+    continue
